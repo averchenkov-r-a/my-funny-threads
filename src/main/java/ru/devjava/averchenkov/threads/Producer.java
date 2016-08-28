@@ -22,7 +22,7 @@ public class Producer implements Runnable {
                 System.out.println("producer #" + startNumer);
                 buffer.put(startNumer);
                 startNumer++;
-                Thread.sleep(300);
+                Thread.sleep((int)(1000 * Math.random()));
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return;

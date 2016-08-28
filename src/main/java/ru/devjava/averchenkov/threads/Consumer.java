@@ -7,10 +7,10 @@ import ru.devjava.averchenkov.threads.buffer.Buffer;
  *
  * @author Averchenkov R.A.
  */
-public class Customer implements Runnable {
+public class Consumer implements Runnable {
     private Buffer buffer;
 
-    public Customer(Buffer buffer) {
+    public Consumer(Buffer buffer) {
         this.buffer = buffer;
     }
 
@@ -18,8 +18,8 @@ public class Customer implements Runnable {
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Integer elem = this.buffer.get();
-                System.out.println("customer #" + elem);
-                Thread.sleep(200);
+                System.out.println("consumer #" + elem);
+                Thread.sleep((int)(500 * Math.random()));
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return;
