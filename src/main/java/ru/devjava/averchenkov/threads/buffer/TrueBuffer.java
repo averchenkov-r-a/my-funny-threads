@@ -16,11 +16,11 @@ public class TrueBuffer extends Buffer {
             while (this.elem != null) {
                 lockPut.wait();
             }
-            this.elem = elem;
+        }
 
-            synchronized (lockGet) {
-                lockGet.notifyAll();
-            }
+        this.elem = elem;
+        synchronized (lockGet) {
+            lockGet.notifyAll();
         }
     }
 
@@ -29,13 +29,13 @@ public class TrueBuffer extends Buffer {
             while (this.elem == null) {
                 lockGet.wait();
             }
-            Integer result = null;
-            synchronized (lockPut) {
-                result = this.elem;
-                this.elem = null;
-                lockPut.notifyAll();
-            }
-            return result;
         }
+        Integer result = null;
+        synchronized (lockPut) {
+            result = this.elem;
+            this.elem = null;
+            lockPut.notifyAll();
+        }
+        return result;
     }
 }
